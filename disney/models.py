@@ -162,7 +162,7 @@ class Amenity(models.Model):
 	)
 	
 	amenity_type = models.CharField(
-		max_length = 25
+		max_length = 25,
 		choices = AMENITY_CHOICES
 	)
 	
