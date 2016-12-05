@@ -1,0 +1,8 @@
+<h1>Hotels</h1>
+<ul>
+{% for hotel in hotel_list %}
+    <li>{{ hotel.name }}</li>
+{% empty %}
+    <li>No hotels.</li>
+{% endfor %}
+</ul>

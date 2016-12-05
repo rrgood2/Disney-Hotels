@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from disney.views import HotelList
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^hotels/', HotelList.as_view(), name='hotel_list')
 ]
+
+
+
+

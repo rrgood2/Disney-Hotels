@@ -5,7 +5,7 @@ from django.db import models
 # Create your models here.
 
 class Hotel(models.Model):
-	name = models.CharField(max_length = 20)
+	name = models.CharField(max_length = 50)
 	address = models.CharField(max_length = 50)
 	phone_num = models.CharField(max_length = 12)
 	theme = models.CharField(max_length = 20)
@@ -42,13 +42,13 @@ class Bed(models.Model):
 		max_length = 5,
 		choices = BED_CHOICES
 	)
-	quantity = models.SmallIntegerField()
+	#quantity = models.SmallIntegerField()
 	
 	class Meta:
 		unique_together = ('hotel', 'room', 'size')
 		
-	#def __unicode__(self):
-	#	return self.bed_text
+	def __unicode__(self):
+		return self.size
 
 class Rate (models.Model):
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
@@ -59,8 +59,8 @@ class Rate (models.Model):
 	class Meta:
 		unique_together = ('hotel', 'room', 'date')	
 
-	#def __unicode__(self):
-	#	return self.rate_text
+	def __unicode__(self):
+		return str(self.rate)
 
 	
 class Customer (models.Model):
@@ -68,7 +68,7 @@ class Customer (models.Model):
 	name = models.CharField(max_length = 25)
 	
 	def __unicode__(self):
-		return self.cust_id
+		return str(self.cust_id)
 	
 	
 class Reservation (models.Model):
@@ -92,8 +92,8 @@ class Phone (models.Model):
 	class Meta:
 		unique_together = ('customer', 'phone_num')
 		
-	#def __unicode__(self):
-	#	return self.phone_text
+	def __unicode__(self):
+		return str(self.phone_num)
 
 class Email (models.Model):
 	customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
@@ -102,8 +102,8 @@ class Email (models.Model):
 	class Meta:
 		unique_together = ('customer', 'email')
 		
-	#def __unicode__(self):
-	#	return self.email_text
+	def __unicode__(self):
+		return self.email
 		
 		
 class CreditCard (models.Model):
@@ -125,8 +125,8 @@ class CreditCard (models.Model):
 	class Meta:
 		unique_together = ('customer', 'card_num')
 		
-	#def __unicode__(self):
-	#	return self.card_text
+	def __unicode__(self):
+		return str(self.card_num)
 
 class Transportation(models.Model):
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
