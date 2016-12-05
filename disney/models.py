@@ -6,7 +6,7 @@ from django.db import models
 
 class Hotel(models.Model):
 	name = models.CharField(max_length = 20)
-	address = models.CharField(max_length = 25)
+	address = models.CharField(max_length = 50)
 	phone_num = models.CharField(max_length = 12)
 	theme = models.CharField(max_length = 20)
 	distance = models.SmallIntegerField()
@@ -14,7 +14,7 @@ class Hotel(models.Model):
 	check_out_time = models.TimeField()
 	
 	def __unicode__(self):
-		return self.hotel_text
+		return self.name
 	
 class Room(models.Model):
 	hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
@@ -26,7 +26,7 @@ class Room(models.Model):
 		unique_together = ('hotel', 'room_num')
 		
 	def __unicode__(self):
-		return self.room_text
+		return self.room_num
 	
 class Bed(models.Model):
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
@@ -47,8 +47,8 @@ class Bed(models.Model):
 	class Meta:
 		unique_together = ('hotel', 'room', 'size')
 		
-	def __unicode__(self):
-		return self.bed_text
+	#def __unicode__(self):
+	#	return self.bed_text
 
 class Rate (models.Model):
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
@@ -59,8 +59,8 @@ class Rate (models.Model):
 	class Meta:
 		unique_together = ('hotel', 'room', 'date')	
 
-	def __unicode__(self):
-		return self.rate_text
+	#def __unicode__(self):
+	#	return self.rate_text
 
 	
 class Customer (models.Model):
@@ -68,7 +68,7 @@ class Customer (models.Model):
 	name = models.CharField(max_length = 25)
 	
 	def __unicode__(self):
-		return self.cust_text
+		return self.cust_id
 	
 	
 class Reservation (models.Model):
@@ -80,8 +80,8 @@ class Reservation (models.Model):
 	start_date = models.DateField()
 	end_date = models.DateField()
 	
-	def __unicode__(self):
-		return self.res_text
+	#def __unicode__(self):
+	#	return self.res_text
 	
 
 
@@ -92,8 +92,8 @@ class Phone (models.Model):
 	class Meta:
 		unique_together = ('customer', 'phone_num')
 		
-	def __unicode__(self):
-		return self.phone_text
+	#def __unicode__(self):
+	#	return self.phone_text
 
 class Email (models.Model):
 	customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
@@ -102,8 +102,8 @@ class Email (models.Model):
 	class Meta:
 		unique_together = ('customer', 'email')
 		
-	def __unicode__(self):
-		return self.email_text
+	#def __unicode__(self):
+	#	return self.email_text
 		
 		
 class CreditCard (models.Model):
@@ -125,8 +125,8 @@ class CreditCard (models.Model):
 	class Meta:
 		unique_together = ('customer', 'card_num')
 		
-	def __unicode__(self):
-		return self.card_text
+	#def __unicode__(self):
+	#	return self.card_text
 
 class Transportation(models.Model):
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
@@ -146,30 +146,30 @@ class Transportation(models.Model):
 		unique_together = ('hotel', 'trans_type')
 		
 	def __unicode__(self):
-		return self.trans_text
+		return self.trans_type
 		
 class Amenity(models.Model):
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
 	
-	#AMENITY_CHOICES = (
-	#	('Dining', (
-	#		()
-	#	),
-	#	('Other', (
-	#		()
-	#	)
-	#	)
-	#)
+	AMENITY_CHOICES = (
+		('GIFT_SHOP', 'Gift Shop'),
+		('FIT_CENTER', 'Fitness Center'),
+		('LAUNDRY', 'Laundromat'),
+		('WIFI', 'Wi-Fi'),
+		('POOL', 'Swimming Pool'),
+		('TICKETS', 'Disneyland Ticket Desk'),
+		('ROOM_SERV', 'Room Service')
+	)
 	
 	amenity_type = models.CharField(
-		max_length = 25
-	#	choices = AMENITY_CHOICES
+		max_length = 25,
+		choices = AMENITY_CHOICES
 	)
 	
 	class Meta:
 		unique_together = ('hotel', 'amenity_type')
 	def __unicode__(self):
-		return self.amenity_text
+		return self.amenity_type
 	
 
 class Restaurant (models.Model):
@@ -180,7 +180,8 @@ class Restaurant (models.Model):
 	
 	class Meta:
 		unique_together = ('hotel', 'name')
-	
+	def __unicode__(self):
+		return self.name
 	
 class Dish (models.Model):
 	restaurant = models.ForeignKey(Restaurant)
@@ -200,4 +201,10 @@ class Dish (models.Model):
 	
 	class Meta:
 		unique_together = ('restaurant', 'dish_name', 'size')
+
+	def __unicode__(self):
+		return self.dish_name
+
+
+
 	
