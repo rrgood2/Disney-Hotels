@@ -13,8 +13,8 @@ class Hotel(models.Model):
 	check_in_time = models.TimeField()
 	check_out_time = models.TimeField()
 	
-	def __unicode__(self):
-		return self.hotel_text
+	#def __unicode__(self):
+	#	return self.hotel_text
 	
 class Room(models.Model):
 	hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
@@ -25,8 +25,8 @@ class Room(models.Model):
 	class Meta:
 		unique_together = ('hotel', 'room_num')
 		
-	def __unicode__(self):
-		return self.room_text
+	#def __unicode__(self):
+	#	return self.room_text
 	
 class Bed(models.Model):
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
@@ -47,8 +47,8 @@ class Bed(models.Model):
 	class Meta:
 		unique_together = ('hotel', 'room', 'size')
 		
-	def __unicode__(self):
-		return self.bed_text
+	#def __unicode__(self):
+	#	return self.bed_text
 
 class Rate (models.Model):
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
@@ -59,16 +59,16 @@ class Rate (models.Model):
 	class Meta:
 		unique_together = ('hotel', 'room', 'date')	
 
-	def __unicode__(self):
-		return self.rate_text
+	#def __unicode__(self):
+	#	return self.rate_text
 
 	
 class Customer (models.Model):
 	cust_id = models.AutoField(primary_key=True, null=False, blank=False)
 	name = models.CharField(max_length = 25)
 	
-	def __unicode__(self):
-		return self.cust_text
+	#def __unicode__(self):
+	#	return self.cust_text
 	
 	
 class Reservation (models.Model):
@@ -80,8 +80,8 @@ class Reservation (models.Model):
 	start_date = models.DateField()
 	end_date = models.DateField()
 	
-	def __unicode__(self):
-		return self.res_text
+	#def __unicode__(self):
+	#	return self.res_text
 	
 
 
@@ -92,8 +92,8 @@ class Phone (models.Model):
 	class Meta:
 		unique_together = ('customer', 'phone_num')
 		
-	def __unicode__(self):
-		return self.phone_text
+	#def __unicode__(self):
+	#	return self.phone_text
 
 class Email (models.Model):
 	customer = models.ForeignKey(Customer, on_delete = models.CASCADE)
@@ -102,8 +102,8 @@ class Email (models.Model):
 	class Meta:
 		unique_together = ('customer', 'email')
 		
-	def __unicode__(self):
-		return self.email_text
+	#def __unicode__(self):
+	#	return self.email_text
 		
 		
 class CreditCard (models.Model):
