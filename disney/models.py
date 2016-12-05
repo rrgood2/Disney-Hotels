@@ -21,12 +21,12 @@ class Room(models.Model):
 	room_num = models.SmallIntegerField()
 	capacity = models.SmallIntegerField()
 	room_view = models.CharField(max_length = 20)
-	
+
 	class Meta:
 		unique_together = ('hotel', 'room_num')
 		
 	def __unicode__(self):
-		return self.room_num
+		return str(self.room_num)
 	
 class Bed(models.Model):
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
@@ -160,16 +160,18 @@ class Amenity(models.Model):
 		('TICKETS', 'Disneyland Ticket Desk'),
 		('ROOM_SERV', 'Room Service')
 	)
+
 	
 	amenity_type = models.CharField(
 		max_length = 25,
 		choices = AMENITY_CHOICES
 	)
+
 	
 	class Meta:
 		unique_together = ('hotel', 'amenity_type')
 	def __unicode__(self):
-		return self.amenity_type
+		return self.amenity_text
 	
 
 class Restaurant (models.Model):
