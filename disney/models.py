@@ -68,10 +68,11 @@ class Customer (models.Model):
 	name = models.CharField(max_length = 25)
 	
 	def __unicode__(self):
-		return str(self.cust_id)
+		return self.name
 	
 	
 class Reservation (models.Model):
+
 	hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
 	room = models.ForeignKey(Room, on_delete = models.CASCADE)
 	rate = models.ForeignKey(Rate, on_delete = models.CASCADE)
@@ -79,9 +80,10 @@ class Reservation (models.Model):
 	num_of_people = models.SmallIntegerField()
 	start_date = models.DateField()
 	end_date = models.DateField()
-	
+
+
 	#def __unicode__(self):
-	#	return self.res_text
+	#	return self.res_id
 	
 
 

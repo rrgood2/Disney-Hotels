@@ -16,10 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from disney.views import HotelList
+from disney.views import ReservationList
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^hotels/', HotelList.as_view(), name='hotel_list')
+    url(r'^hotels/', HotelList.as_view(), name='hotel_list'),
+    url(r'^reservations/', ReservationList.as_view(), name='reservation_list')
 ]
 
 

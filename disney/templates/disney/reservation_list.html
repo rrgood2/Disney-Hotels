@@ -1,5 +1,5 @@
 <head>
-  <title>HOTELS</title>
+  <title>RESERVATIONS</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -8,30 +8,28 @@
 </head>
 <body style="background-color: #00bfff">
 	<div class="jumbotron">
-	<h1 class="text-center">Hotels</h1>
+		<h1 class="text-center">Reservations</h1>
 	</div>
 	<table class="table">
 	<tr>
-	  <th>Name</th>
-	  <th>Address</th>
-	  <th>Phone Number</th>
-	  <th>Theme</th>
-	  <th>Distance</th>
-	  <th>Check In</th>
-	  <th>Check Out</th>
+	  <th>Hotel</th>
+	  <th>Room Number</th>
+	  <th>Rate ($)</th>
+	  <th>Number of People</th>
+	  <th>Start Date</th>
+	  <th>End Date</th>
 	</tr>
-	{% for hotel in hotel_list %}
+	{% for reservation in reservation_list %}
 	<tr>
-	    <td>{{ hotel.name }}</td>
-	    <td>{{hotel.address}}</td>
-	    <td>{{hotel.phone_num}}</td>
-	    <td>{{hotel.theme}}</td>
-	    <td>{{hotel.distance}}</td>
-	    <td>{{hotel.check_in_time}}</td>
-	    <td>{{hotel.check_out_time}}</td>
+	    <td>{{ reservation.hotel }}</td>
+	    <td>{{reservation.room}}</td>
+	    <td>{{reservation.rate}}</td>
+	    <td>{{reservation.num_of_people}}</td>
+	    <td>{{reservation.start_date}}</td>
+	    <td>{{reservation.end_date}}</td>
 	</tr>
 	{% empty %}
-	    <li>No hotels.</li>
+	    <li>No reservations.</li>
 	{% endfor %}
 	</table>
 </body>
